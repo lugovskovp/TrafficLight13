@@ -1,7 +1,7 @@
 uint8_t cnt;
-void setup() {
-	cnt=0;
-}
-void loop() {
-  cnt++;
+int main(){
+	cnt=0;		// < setup()
+	while(1){
+		cnt++;	// < loop()
+	}
 }
