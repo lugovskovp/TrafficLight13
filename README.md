@@ -2,10 +2,12 @@
 Features:
 - Used 4 pins for control 12 dumbs LEDs, plus one pin for button.
 - ISP programming for ATtiny13, RESET pin **not** used.
-- Traffic Light signals are fully compatible with [Vienna Convention on Road Signs and Signals](https://en.wikipedia.org/wiki/Vienna_Convention_on_Road_Signs_and_Signals#Traffic_lights)
+- Traffic Light signals are fully compatible with [Vienna Convention on Road Signs and Signals](https://en.wikipedia.org/wiki/Vienna_Convention_on_Road_Signs_and_Signals#Traffic_lights).
+- Work from one 1.5v Alcaline AA battery.
+- I trust my dauther then she describe it as "cutie".
 - Short pressing button change working between next modes:
-  - Amber flashing
-  - Red -> Red and Amber -> Green -> Flashing Green -> Amber -> Read
+  - Amber flashing.
+  - Red -> Red and Amber -> Green -> Flashing Green -> Amber -> Red -> ...
 - Long push button for sleep|wakeup Traffic Light.
 
 ## Table of contents
@@ -19,16 +21,16 @@ Features:
 	+ *TrafficLight13.vcxproj*
 	+ *TrafficLight13.vcxproj.filters*
  + [***docs***](https://github.com/lugovskovp/TrafficLight13/tree/master/docs)  Documentation. Appnotes, datasheets ect.
- 	+ *ATmega328 datasheet.pdf*
 	+ *ATtiny13A datasheet.pdf*
+ 	+ *ATmega328 datasheet.pdf*
 	+ *AVR4013 — PicoPower basics.pdf*
 	+ *AVR4027 - Tips and Tricks to Optimize Your C Code.pdf*
 	+ *Button state machine.vsd*
 	+ *power.xlsx*
- + [***gcc***](https://github.com/lugovskovp/TrafficLight13/tree/master/gcc)  One pair command files for win-cmd shell: compile and upload firmware to ATtiny13
+ + [***gcc***](https://github.com/lugovskovp/TrafficLight13/tree/master/gcc)  One pair command files for win-cmd shell: compile and upload firmware to ATtiny13.
  	+ *0_MAKE & asm.cmd*
 	+ *0_MAKE & upload.cmd*
- + [***pix***](https://github.com/lugovskovp/TrafficLight13/tree/master/pix) Project pictures
+ + [***pix***](https://github.com/lugovskovp/TrafficLight13/tree/master/pix) Project pictures.
  	+ *arduino pro mini pinout.png*
 	+ *attiny13 min setup.png*
 	+ *Button state machine.jpg*
@@ -46,6 +48,7 @@ Features:
  Source code of programm fully works on ATtiny13, but on ATMega328 not realised only button functions. 
  
  ## Youtube video of Traffic Light working
- Oups, You should understand Russian vooice, sorry. )))) Or You can press Mute and just get pleasure from light show, its awesome.
+ Oups, You should understand Russian voice, sorry. )))) Or You can press Mute and just get pleasure from light show, its awesome.
+ 
 [![I think this is awesome](https://img.youtube.com/vi/23ju4JVKMeA/0.jpg)](https://www.youtube.com/watch?v=23ju4JVKMeA)
 
