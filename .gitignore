@@ -62,6 +62,7 @@ _ReSharper*/
 $tf*/
 TrafficLight13/__vm*/
 .tfignore
+.not_4_github/*
 
 
 
