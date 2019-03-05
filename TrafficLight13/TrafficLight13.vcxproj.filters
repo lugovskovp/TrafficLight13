@@ -17,5 +17,9 @@
   <ItemGroup>
     <None Include="TrafficLight13.ino" />
   </ItemGroup>
- 
+  <ItemGroup>
+    <ClInclude Include="__vm\.TrafficLight13.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
