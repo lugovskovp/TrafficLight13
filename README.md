@@ -36,7 +36,7 @@ Features:
 	*vs scr.png*
 	*led colors and voltages.jpg*
 	*attiny13piout.jpg*
- + [schematic](https://github.com/lugovskovp/TrafficLight13/tree/master/schematic) Schematic Layout and PCB design files for [DipTrace](https://diptrace.com/) CAD.
+ + [***schematic***](https://github.com/lugovskovp/TrafficLight13/tree/master/schematic) Schematic Layout and PCB design files for [DipTrace](https://diptrace.com/) CAD.
 	*traffic light ver0.dch*
 	*traffic light.dch*
 	*traffic light.dip*
