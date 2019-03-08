@@ -8,12 +8,14 @@ Features:
 - Short pressing button change working between next modes:
   - Amber flashing.
   - Red -> Red and Amber -> Green -> Flashing Green -> Amber -> Red -> ...
-- Long push button for sleep|wakeup Traffic Light.
+- Long push button for sleep|wakeup Traffic Light to|from power down mode.
 
 ## Table of contents
-* [Directories description](#directories-and-files-description)
+* [Directories & description](#directories-and-files-description)
 * [Source - supported MCU](#is-this-stuff-for-attiny-or-atmega)
 * [How it seems?](#youtube-video-of-traffic-light-working)
+
+![Schematic screenshot](https://github.com/lugovskovp/TrafficLight13/blob/master/pix/02-03.png)
 
 ## Directories and files description
  + [***TrafficLight13***](https://github.com/lugovskovp/TrafficLight13/tree/master/TrafficLight13)  Source code, C language altrouth .ino (arduino) extention of file.
