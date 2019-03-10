@@ -1,6 +1,6 @@
 :: Использование: 
 :: c:\path_to_ino_file\0_MAKE & asm.cmd FILE.ino
-
+ 
 :: Создать директорию, почистить внутри файлы, если есть
 @mkdir Release
 @cd Release
