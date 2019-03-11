@@ -1,5 +1,10 @@
 :: Использование: 
-:: c:\path_to_ino_file\0_MAKE & asm.cmd FILE.ino
+:: "c:\path_to_ino_file\0_MAKE & upload.cmd" FILE.ino
+
+:: For Notepad++ use F5 and in command window enter: "C:\Users\p.lugovskov\Documents\Arduino\TrafficLight13\gcc\0_MAKE & upload.cmd" $(FULL_CURRENT_PATH)
+
+:: Переход в директорию исходника
+cd %~p1
  
 :: Создать директорию, почистить внутри файлы, если есть
 @mkdir Release
