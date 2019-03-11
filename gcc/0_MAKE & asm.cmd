@@ -1,6 +1,11 @@
 :: Использование: 
 :: c:\path_to_ino_file\0_MAKE & asm.cmd FILE.ino
 
+:: For Notepad++ use F5 and in command window enter: "C:\Users\p.lugovskov\Documents\Arduino\TrafficLight13\gcc\0_MAKE & asm.cmd" $(FULL_CURRENT_PATH)
+
+:: Переход в директорию исходника
+cd "%~p1"
+
 :: Создать директорию, почистить внутри файлы, если есть
 @mkdir Release
 @cd Release
@@ -31,7 +36,7 @@ set AVRBINPATH="c:\Users\p.lugovskov\AppData\Local\arduino15\packages\arduino\to
 pause
 
 :: создать и показать asm в файл с тем же именем
-@%AVRBINPATH%\avr-objdump.exe -D "./Release/%~n1.elf">>"./Release/%~n1.asm"
+@%AVRBINPATH%\avr-objdump.exe -S "./Release/%~n1.elf">>"./Release/%~n1.asm"
 
 @cd Release
 @echo "------------------------------------------------------------------"
