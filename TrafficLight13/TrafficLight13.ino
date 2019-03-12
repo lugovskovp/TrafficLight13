@@ -193,11 +193,14 @@ void inline dbg(){
 }
 */
 
+//uint8_t current_signal __attribute__ ((section (".noinit")));
+
+// uint8_t	current_signal;				// 1 байт на текущее состояние, номер в traffic_signals
 //.................................... основная программа
 //
 int main() {
+	
 	uint8_t	current_signal;				// 1 байт на текущее состояние, номер в traffic_signals
-
 #pragma region Initialisation&setup
 	// Планировщик работает по схеме "а потом спи-отдыхай". 
 	set_sleep_mode(SLEEP_MODE_IDLE);	//установить режим сна - см.даташит
