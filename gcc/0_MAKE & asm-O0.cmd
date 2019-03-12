@@ -38,7 +38,7 @@ pause
 
 :: создать и показать asm в файл с тем же именем
 ::@%AVRBINPATH%\avr-objdump.exe -d "./Release/%~n1.elf">>"./Release/%~n1.asm"
-@%AVRBINPATH%\avr-objdump.exe -S "./Release/%~n1.elf">>"./Release/%~n1.asm"
+@%AVRBINPATH%\avr-objdump.exe -S "./Release/%~n1.elf">"./Release/%~n1.asm"
 
 @cd Release
 @echo "------------------------------------------------------------------"
