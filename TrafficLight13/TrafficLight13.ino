@@ -194,12 +194,13 @@ void inline dbg(){
 */
 
 //uint8_t current_signal __attribute__ ((section (".noinit")));
-
 // uint8_t	current_signal;				// 1 байт на текущее состояние, номер в traffic_signals
 //.................................... основная программа
 //
+uint16_t useless_var __attribute__ ((section (".noinit")));
+
 int main() {
-	
+	//uint16_t useless_var;
 	uint8_t	current_signal;				// 1 байт на текущее состояние, номер в traffic_signals
 #pragma region Initialisation&setup
 	// Планировщик работает по схеме "а потом спи-отдыхай". 
@@ -212,7 +213,7 @@ int main() {
 	SET_MODE_WORK;				// обработчик состояния нажатия кнопки
 	SET_USE_FIRST_VALUES_LIGHT_FLAG;	//первая пара значений
 	scan_button_cnt = 0;		// обнулить счетчик кнопки
-
+	useless_var = 5;
 	// Начало работы или сброс отобразить частым миганием
 	current_signal = LIGHT_NUM_START_SHOW;	// Установка режима работы сигнализации - индикация подачи питания/перезагрузки
 	SET_FORCE_SET_SIGNAL_FLAG;				// включить лампы согласно current_signal
@@ -229,9 +230,11 @@ int main() {
 			// 
 			if(tl_flash_end){
 				tl_flash_end -= MAX_GLOBAL_TIMER_VALUE;		// откатить период мигания, если есть
+				useless_var --;
 			}
 			if(tl_signal_end){
 				tl_signal_end -= MAX_GLOBAL_TIMER_VALUE;	// // откатить период состояния, если есть
+				useless_var ++;
 			}
 			// setPeriods(currentMode, false); // код на 12 байт меньше, но tl_.._end сбросятся в исходное, будет единичным увеличенным интервалом переключения
 		}
@@ -242,6 +245,7 @@ int main() {
 		if(BUTTON_ON){
 			if(scan_button_cnt < USHRT_MAX){
 				scan_button_cnt++;				// еще одна 1/37 секунды кнопка продолжала быть нажатой
+				useless_var-=scan_button_cnt;
 			}
 			// СБРОС флагов - дело тех, кто их ниже обработает
 			if(scan_button_cnt > PERIOD_PRESS_BUTTON_SHORT){
@@ -289,6 +293,7 @@ int main() {
 					// последний раз перед засыпанием светофор был в режиме желтого мигающего? LIGHT_NUM_ERR
 					current_signal = (IF_LIGHT_SIGNAL_ALT_MODE_FLAG) ? LIGHT_NUM_YELLOW_FLASH : LIGHT_NUM_STD_START;
 					SET_FORCE_SET_SIGNAL_FLAG;		// включить лампы согласно current_signal
+					useless_var |= current_signal;
 				}
 			}
 			//о, кнопку отжали...
@@ -341,6 +346,7 @@ int main() {
 			// О! доброе утро, проснулись! Нажата кнопка?
 			if(BUTTON_ON){
 				set_sleep_mode(SLEEP_MODE_IDLE);
+				useless_var = 77;
 				SET_MODE_WAKEUP;
 			}else{	
 				// Не нажата? Спать дальше.
@@ -357,6 +363,7 @@ int main() {
 		default:
 			//! Что то пошло совсем не так - подать индикацию ошибки сюда. Вообще - невозможное состояние при правильно написанной программе
 			current_signal = LIGHT_NUM_ERR;
+			globalTimer = useless_var;
 			SET_FORCE_SET_SIGNAL_FLAG;
 			//setPorts(current_signal,true);
 			//setPeriods(current_signal,true);
@@ -371,7 +378,7 @@ int main() {
 			setPorts(current_signal, IF_USE_FIRST_VALUES_LIGHT_FLAG);	// переключить режим текущего состояния на #current_signal в массиве
 			setPeriods(current_signal, true);
 		}
-
+		globalTimer = useless_var - 123;
 		// спать еще на 1/37 секунды. Или, может, и дольше.
 		sleep_cpu();	//и в самом конце бесконечного главного цикла - уходим в сон.
 	}
