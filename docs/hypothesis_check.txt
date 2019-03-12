@@ -37,6 +37,7 @@ Program:     982 bytes (95.9% Full)
 Data:          8 bytes (12.5% Full)
 
 
-3. Htpekmnfns
+3. Расчеты и выводы
 -O0 разница g-l 2192 - 2146 = 46
 -Os разница g-l 1060 - 982 = 78
+
