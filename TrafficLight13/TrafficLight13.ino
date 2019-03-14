@@ -96,8 +96,8 @@ const lightSignalization traffic_signals[] PROGMEM= {	// Порядок чередования сиг
 
 volatile uint16_t  globalTimer;	// трачу два байта оперативки из 64 на глобальный таймер
 uint8_t scan_button_cnt;		// один байт счетчик длительности нажатия кнопки
-uint16_t tl_flash_end;			// 2 байта на время окончания периода мигания (если !0), 
-uint16_t tl_signal_end;			// 2 байта на время окончания работы текущего сигнала и переключения на следующий (если !0)	
+//uint16_t tl_flash_end;			// 2 байта на время окончания периода мигания (если !0), 
+//uint16_t tl_signal_end;			// 2 байта на время окончания работы текущего сигнала и переключения на следующий (если !0)	
 uint8_t f_button_state_flags;	// 1б, псевдорегистр машины состояний кнопки и вместилище булевых переменных
 // итого, 8 байт на глобальные переменные
 
@@ -148,7 +148,7 @@ uint8_t f_button_state_flags;	// 1б, псевдорегистр машины состояний кнопки и вме
 
 
 //.................................... Прототипы функций
-void setPeriods(uint8_t num, bool set_both_flash_and_signal);	// установка tl_flash_end, tl_signal_end
+//void setPeriods(uint8_t num, bool set_both_flash_and_signal);	// установка tl_flash_end, tl_signal_end
 void setPorts(uint8_t num, bool use_main_values);				// установка режима работы портов
 void inline init_timer_clock(){		// тактирование таймера глобальной переменной времени
 #ifdef GIMSK	// Если ATtiny13 - 
@@ -200,7 +200,10 @@ void inline dbg(){
 //uint16_t useless_var __attribute__ ((section (".noinit")));
 
 int main() {
-	//uint16_t useless_var;
+	//
+	uint16_t tl_flash_end;			// 2 байта на время окончания периода мигания (если !0), 
+	uint16_t tl_signal_end;			// 2 байта на время окончания работы текущего сигнала и переключения на следующий (если !0)	
+
 	uint8_t	current_signal;				// 1 байт на текущее состояние, номер в traffic_signals
 #pragma region Initialisation&setup
 	// Планировщик работает по схеме "а потом спи-отдыхай". 
@@ -260,7 +263,9 @@ int main() {
 			if(globalTimer > tl_flash_end){
 				FLIP_USE_FIRST_VALUES_LIGHT_FLAG;				// !use_main_values - или или одно из двух ))
 				setPorts(current_signal, IF_USE_FIRST_VALUES_LIGHT_FLAG);		// переключить режим текущего состояния на противоположный
-				setPeriods(current_signal, false);			// обновить только следующий период мигания, но не состояния
+				//setPeriods(current_signal, false);			// обновить только следующий период мигания, но не состояния
+				tl_flash_end = pgm_read_word_near (&(traffic_signals[current_signal].flash_period));	// период мигания
+				tl_flash_end = (tl_flash_end)? tl_flash_end + globalTimer : 0;	//время окончания режима мигания - если не нулевое значение 
 			}
 		}
 
@@ -370,7 +375,11 @@ int main() {
 			RES_FORCE_SET_SIGNAL_FLAG;		// сброс флага
 			SET_USE_FIRST_VALUES_LIGHT_FLAG;	// Новый режим - начинать с 0-го значения пары ддр-порт
 			setPorts(current_signal, IF_USE_FIRST_VALUES_LIGHT_FLAG);	// переключить режим текущего состояния на #current_signal в массиве
-			setPeriods(current_signal, true);
+			//setPeriods(current_signal, true);
+			tl_flash_end = pgm_read_word_near (&(traffic_signals[current_signal].flash_period));	// период мигания
+			tl_flash_end = (tl_flash_end)? tl_flash_end + globalTimer : 0;	//время окончания режима мигания - если не нулевое значение 
+			tl_signal_end = pgm_read_word_near(&(traffic_signals[current_signal].signal_period));	
+			tl_signal_end = (tl_signal_end)? tl_signal_end + globalTimer : 0;			// время переключения на следующий режим, если не нулевое значение
 		}
 		// спать еще на 1/37 секунды. Или, может, и дольше.
 		sleep_cpu();	//и в самом конце бесконечного главного цикла - уходим в сон.
@@ -403,7 +412,7 @@ int main() {
 
  
 
-
+ /*
  //Установить время окончания режима мигания (или длительность работы режима сигнализации)
 void setPeriods(uint8_t num, bool set_both_flash_and_signal){
 // глобальные переменные
@@ -417,7 +426,7 @@ void setPeriods(uint8_t num, bool set_both_flash_and_signal){
 		tl_signal_end = (tl_signal_end)? tl_signal_end + globalTimer : 0;			// время переключения на следующий режим, если не нулевое значение
 	}
 }
-
+*/
 
 //Program size: 976 bytes (used 95% of a 1 024 byte maximum) (1,59 secs)
 //Minimum Memory Usage: 8 bytes (13% of a 64 byte maximum)
