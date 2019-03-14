@@ -200,6 +200,9 @@ void inline dbg(){
 //uint16_t useless_var __attribute__ ((section (".noinit")));
 
 int main() {
+
+	//
+
 	uint16_t tl_flash_end;			// 2 байта на время окончания периода мигания (если !0), 
 	uint16_t tl_signal_end;			// 2 байта на время окончания работы текущего сигнала и переключения на следующий (если !0)	
 
