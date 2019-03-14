@@ -432,3 +432,6 @@ void setPeriods(uint8_t num, bool set_both_flash_and_signal){
 
 //Program size: 976 bytes (used 95% of a 1 024 byte maximum) (1,59 secs)
 //Minimum Memory Usage: 8 bytes (13% of a 64 byte maximum)
+
+//Program size: 900 bytes (used 88% of a 1 024 byte maximum) (1,22 secs)
+//Minimum Memory Usage: 4 bytes (6% of a 64 byte maximum)
