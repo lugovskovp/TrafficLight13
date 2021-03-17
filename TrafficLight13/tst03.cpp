@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <avr/interrupts.h>
 
 int main() {
     char str[4];
